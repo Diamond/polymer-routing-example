@@ -1,0 +1,34 @@
+<link rel="import" href="./hello-person.html" />
+<link rel="import" href="./goodbye-person.html" />
+
+<dom-module id="main-app">
+  <template>
+    <app-location route="{{route}}"></app-location>
+    <app-route route="{{route}}" pattern="/" active="{{active}}"></app-route>
+    <app-route route="{{route}}" pattern="/hello" active="{{helloActive}}" ></app-route>
+    <app-route route="{{route}}" pattern="/goodbye" active="{{goodbyeActive}}" ></app-route>
+    <div id="layout">
+      <template is="dom-if" if="{{active}}">
+        <!-- Include homepage stuff here -->
+      </template>
+      <template is="dom-if" if="{{helloActive}}">
+        <hello-person></hello-person>
+      </template>
+      <template is="dom-if" if="{{goodbyeActive}}">
+        <goodbye-person></goodbye-person>
+      </template>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'main-app',
+      properties: {
+        route: {
+          value: function() {
+            return { path: '/', prefix: '', __queryParams: {} };
+          },
+        },
+      },
+    });
+  </script>
+</dom-module>
